@@ -12,7 +12,10 @@ namespace RiotAPIDemo
         static async Task Main(string[] args)
         {
             var riotApi = RiotApi.NewInstance("RGAPI-393e05a1-d9ac-4320-8bfa-afd80a4d68d9");
-            var summonerNameQuery = "reg454";
+
+            Console.WriteLine("Enter username: ");
+            var summonerNameQuery = Console.ReadLine();
+
 
             // Get summoners data (blocking).
             var summonerData = await riotApi.SummonerV4.GetBySummonerNameAsync(Region.NA, summonerNameQuery);
@@ -28,7 +31,7 @@ namespace RiotAPIDemo
             // Get 10 most recent matches (blocking).
             // Queue ID 420 is RANKED_SOLO_5v5 (TODO)
             var matchlist = await riotApi.MatchV4.GetMatchlistAsync(
-               Region.NA, summonerData.AccountId, queue: new[] { 420 }, endIndex: 20);
+               Region.NA, summonerData.AccountId, queue: new[] { 420 }, endIndex: 5);
             // Get match results (done asynchronously -> not blocking -> fast).
             var matchDataTasks = matchlist.Matches.Select(
                    matchMetadata => riotApi.MatchV4.GetMatchAsync(Region.NA, matchMetadata.GameId)
