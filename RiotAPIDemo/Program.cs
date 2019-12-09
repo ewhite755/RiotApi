@@ -26,7 +26,7 @@ namespace RiotAPIDemo
                 return;
             }
 
-            Console.WriteLine($"Match history for {summonerData.Name}:");
+            Console.WriteLine($"Ranked Match history for {summonerData.Name}:");
 
             // Get 10 most recent matches (blocking).
             // Queue ID 420 is RANKED_SOLO_5v5 (TODO)
